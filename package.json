@@ -1,0 +1,29 @@
+{
+  "name": "dyconf",
+  "description": "Generic dynamic configuration template rendering.",
+  "author": "Christian Zangl",
+  "version": "0.1.0",
+  "keywords": [
+    "configuration",
+    "template",
+    "hjson"
+  ],
+  "bin": {
+    "dyconf": "./main.js"
+  },
+  "homepage": "https://github.com/laktak/dyconf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laktak/dyconf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laktak/dyconf/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "hjson": "^1.7.4",
+    "internet-timestamp": "0.0.1",
+    "lodash": "^4.0.0",
+    "tail": "^0.4.0"
+  }
+}
