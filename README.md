@@ -78,7 +78,7 @@ You can use `start` to watch for changes. Call `update` to trigger `fetchData` a
 
 # Sample
 
-The *Hello World* source is available in the [sample folder](blob/master/sample/).
+The *Hello World* source is available in the [sample folder](sample/).
 
 ## config.hjson
 

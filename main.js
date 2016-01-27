@@ -61,7 +61,7 @@ if (args.config) {
 
 function log(text) {
   if (!args.q)
-    console.log(timestamp(new Date()), "localhost", "template["+process.pid+"]:", text);
+    console.log(timestamp(new Date()), "localhost", "dyconf["+process.pid+"]:", text);
 }
 
 function execCmd(cmd, sync) {
