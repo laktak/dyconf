@@ -1,0 +1,16 @@
+List of services:
+- foo
+  running on nodes: a, b
+- bar
+  running on nodes: b, c, d
+
+List of nodes:
+- a
+  running services: foo
+- b
+  running services: foo, bar
+- c
+  running services: bar
+- d
+  running services: bar
+

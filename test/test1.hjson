@@ -1,0 +1,33 @@
+{
+  controller: test1.js
+  outputFile: /dev/null
+  refreshInterval: -1
+
+  # not used for this test
+  startup: ""
+  reload: ""
+  shutdown: ""
+
+  template:
+    '''
+    List of services:
+    <% services.forEach(svc => {
+    %>- <%=svc.name%>
+      running on nodes: <%=svc.nodes.join(", ")%>
+    <% });
+    %>
+    List of nodes:
+    <%
+    // groupBy nodes
+    var nodes={};
+    services.forEach(svc => {
+      svc.nodes.forEach(node => (nodes[node]=(nodes[node]||[])).push(svc.name));
+    });
+
+    Object.keys(nodes).forEach(name => {
+    %>- <%=name%>
+      running services: <%=nodes[name].join(", ")%>
+    <% });
+    %>
+    '''
+}
