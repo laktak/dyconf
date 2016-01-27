@@ -6,6 +6,12 @@ dyconf is a tool, not a library. It is best suited to run inside a docker contai
 
 **TL;DR** you can find a working sample in [consul-haproxy-dyconf](https://github.com/laktak/consul-haproxy-dyconf).
 
+## Install from npm
+
+```
+npm install dyconf -g
+```
+
 ## Usage
 
 ```
