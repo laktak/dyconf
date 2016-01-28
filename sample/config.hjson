@@ -11,7 +11,7 @@
   # can be used to redirect logs for Docker
   logFile: ""
 
-  # run on start/restart to configure rsyslog and launch haproxy
+  # run on start/restart
   startup:
     '''
     # prepare, configure files or run any required processes
@@ -21,7 +21,7 @@
     cat /tmp/test.txt
     '''
 
-  # to reload a new configuration with minimal service impact and without breaking existing sessions
+  # reload a new configuration
   reload:
     '''
     # here you would tell the main process (e.g. haproxy)
@@ -31,7 +31,7 @@
     cat /tmp/test.txt
     '''
 
-  # kill haproxy on shutdown
+  # run on shutdown
   shutdown:
     '''
     # here you would kill the main process

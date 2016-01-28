@@ -6,6 +6,14 @@ dyconf is a tool, not a library. It is best suited to run inside a docker contai
 
 **TL;DR** you can find a working sample in [consul-haproxy-dyconf](https://github.com/laktak/consul-haproxy-dyconf).
 
+
+### How does this compare to consul-template or confd?
+
+- dyconf is not tied to a specific backend. You can use it with ZooKeeper, etcd, ... or your own REST services.
+- It uses node.js so you have access to npm modules.
+- dyconf uses [lodash templates](https://lodash.com/docs#template) which, if you know JavaScript, might be easier to grok than the golang text templates that are used by confd and consul-template.
+
+
 ## Install from npm
 
 ```
@@ -102,7 +110,7 @@ The *Hello World* source is available in the [sample folder](sample/).
   # can be used to redirect logs for Docker
   logFile: ""
 
-  # run on start/restart to configure rsyslog and launch haproxy
+  # run on start/restart
   startup:
     '''
     # prepare, configure files or run any required processes
@@ -112,7 +120,7 @@ The *Hello World* source is available in the [sample folder](sample/).
     cat /tmp/test.txt
     '''
 
-  # to reload a new configuration with minimal service impact and without breaking existing sessions
+  # reload a new configuration
   reload:
     '''
     # here you would tell the main process (e.g. haproxy)
@@ -122,7 +130,7 @@ The *Hello World* source is available in the [sample folder](sample/).
     cat /tmp/test.txt
     '''
 
-  # kill haproxy on shutdown
+  # run on shutdown
   shutdown:
     '''
     # here you would kill the main process
