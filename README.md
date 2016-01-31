@@ -39,7 +39,8 @@ The Hjson configuration defines the following settings:
 - controller: path to the JavaScript controller (see below)
 - outputFile: configuration file to write to
 - refreshInterval: refresh interval in seconds unless handled by the controller
-- logFile: logfile to tail and print to the console (useful with the docker logs command)
+- syslog: set to `true` to run a syslog server and print to the console (useful with the docker logs command)
+- logFile: path to a logfile to tail and print to the console (similar to syslog above)
 - startup: a shell script to run at startup
 - reload: a shell script to run whenever the configuration changes
 - shutdown: a shell script to run at when the process is terminated

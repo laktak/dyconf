@@ -16,6 +16,7 @@ var Hjson=require("hjson");
 var Tail=require("tail").Tail;
 var Template=require("lodash.template");
 var timestamp=require("internet-timestamp");
+var Syslogd=require("./syslog.js");
 
 var helpText="\n"+
   "  -config   path to the template configuration\n"+
@@ -27,6 +28,7 @@ var helpText="\n"+
 var args={}, argv=[];
 process.argv.slice(2).forEach(x => { if (x[0]==="-") { var i=x.indexOf("="); args[x.substr(1, i>0?i-1:undefined)]=i>0?x.substr(i+1):true; } else argv.push(x); });
 
+var hostname=require("os").hostname();
 var baseDir, configFile, config;
 var controller, compiledTemplate, result;
 var outputFile, tailFile;
@@ -59,9 +61,13 @@ if (args.config) {
   process.exit(1);
 }
 
-function log(text) {
+function log0(date, host, process, pid, text) {
   if (!args.q)
-    console.log(timestamp(new Date()), "localhost", "dyconf["+process.pid+"]:", text);
+    console.log("%s %s %s %s - - %s", timestamp(date), host, process, pid, text);
+}
+
+function log(text) {
+  log0(new Date(), hostname, "dyconf", process.pid, text);
 }
 
 function execCmd(cmd, sync) {
@@ -102,10 +108,18 @@ process.on("SIGHUP", () => {
 });
 
 if (tailFile) {
-  fs.closeSync(fs.openSync(tailFile, "wx"));
+  fs.closeSync(fs.openSync(tailFile, "w")); // ensure file exists, truncate
   var tail=new Tail(tailFile);
   tail.on("line", console.log);
   tail.on("error", err => console.error("#tail error: "+err));
+}
+
+if (config.syslog) {
+  Syslogd(function(msg) {
+    console.log(msg);
+  }).listen(514, function(err) {
+    if (err) console.error("#unable to start syslog: "+err);
+  })
 }
 
 if (controller.start) {
