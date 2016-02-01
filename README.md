@@ -107,8 +107,12 @@ The *Hello World* source is available in the [sample folder](sample/).
   # refresh interval in seconds
   refreshInterval: 5
 
-  # logfile to tail to the console (can be "")
+  # start a syslog server listening on port 514 (use rfc5424)
   # can be used to redirect logs for Docker
+  syslog: false
+
+  # logfile to tail to the console (can be "")
+  # can be used like syslog for Docker
   logFile: ""
 
   # run on start/restart
